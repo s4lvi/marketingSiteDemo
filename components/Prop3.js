@@ -14,7 +14,7 @@ const Prop3 = () => {
                 </div>
             </div>
             <div className="heading white-text">
-                <h3>The Award-Winning Mustang</h3>
+                <h3>The Award-Winning Electric</h3>
                 <div className={"img"}>
                     <Image src={`${process.env.cdn}/assets/3-prop/Mach-E-lockup%203.webp`} width={2508} height={615} layout={"responsive"} alt={"mach-e"} unoptimized={true} loading={"eager"}/>
                 </div>
