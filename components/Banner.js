@@ -1,19 +1,14 @@
 import Image from "next/image"
 import {useState} from 'react'
-import {ampli} from '../src/ampli'
 
 const Banner = () => {
     const [zip, setZip] = useState('')
     const [email, setEmail] = useState('')
-    const [showUberModal, setShowUberModal] = useState(false)
+    const [showRideShareModal, setShowShareModal] = useState(false)
     const [showEmailModal, setShowEmailModal] = useState(false)
     const [showSuccessModal, setShowSuccessModal] = useState(false)
     const [showEmailErrors, setShowEmailErrors] = useState(false)
     const [showZipErrors, setShowZipErrors] = useState(false)
-
-    const loginWithUberButtonClicked = () => {
-        ampli.track("uber login clicked", {"uber_login_button_location": "UberModal"})
-    }
 
     const changeZip = e => {
         setZip(e.target.value)
@@ -75,7 +70,7 @@ const Banner = () => {
             .then((response) => {
                 if (response.status === 200) {
                     ampli.track("zipcode submitted", {"zipcode_type": "SERVICE_AVAILABLE_FORM"});
-                    setShowUberModal(true)
+                    setShowRideShareModal(true)
                 } else if(response.status === 404) {
                     ampli.track("zipcode submitted", {"zipcode_type": "SERVICE_UNAVAILABLE_FORM"})
                     openEmailModal();
@@ -116,13 +111,13 @@ const Banner = () => {
             <div className="text white-text center-text text-larger">
                 <h2>An exciting invitation for select rideshare drivers</h2>
                 <p>
-                    Ford Drive invites qualifying rideshare drivers in San Diego to join our electrifying Rideshare
-                    Program. Approved drivers can lease the Mustang Mach-E<sup>®</sup> on a weekly basis with no
+                    Drive invites qualifying rideshare drivers in San Diego to join our electrifying Rideshare
+                    Program. Approved drivers can lease the Electric<sup>®</sup> on a weekly basis with no
                     long-term commitment.
                 </p>
             </div>
             <p className='text zip-text center-text'>
-                Please enter your zip code to see if Ford Drive is available in your area.
+                Please enter your zip code to see if Drive is available in your area.
             </p>
             <div id={"zipFormContainer"}>
                 <form id={"zipForm"}>
@@ -141,7 +136,7 @@ const Banner = () => {
                 </form>
             </div>
             {
-                showUberModal &&
+                showRideShareModal &&
                 <div className={"zip-modal-container"}>
                     <div className={"zip-modal"}>
                         <div className={"zip-modal-upper"}>
@@ -150,15 +145,15 @@ const Banner = () => {
                                     <Image src={`${process.env.cdn}/assets/banner/Logo.svg`} width={145} height={69} alt={'logo'} loading={"eager"} />
                                 </div>
                                 <div className={"modal-close"} onClick={() => {
-                                    setShowUberModal(false)
+                                    setShowRideShareModal(false)
                                     }}>
                                     <Image src={`${process.env.cdn}/assets/banner/close.svg`} width={16} height={16} alt={'close'} loading={"eager"}/>
                                 </div>
                             </div>
-                            <p className={'modal-text'}>Good news! Ford Drive is live in San Diego, but this offer is only available to Uber drivers at this time.</p>
-                            <p className={'grey-text'}>Login to your Uber account to learn more and see if you qualify.</p>
+                            <p className={'modal-text'}>Good news! Drive is live in San Diego, but this offer is only available to RideShare drivers at this time.</p>
+                            <p className={'grey-text'}>Login to your RideShare account to learn more and see if you qualify.</p>
                             <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
-                                <a href={process.env.fordDriveLink}><button name="uberLoginButton" id={"loginWithUberButton"} onClick={loginWithUberButtonClicked}>Log in with Uber</button></a>
+                                <a href={process.env.fordDriveLink}><button name="uberLoginButton" id={"loginWithUberButton"}>Log in with RideShare</button></a>
                             </div>
                         </div>
                         <div className={"zip-modal-lower"}>
@@ -229,7 +224,7 @@ const Banner = () => {
                                     <Image src={"/assets/banner/close.svg"} width={16} height={16} alt={'close'} />
                                 </div>
                             </div>
-                            <p className={'modal-text'}>Thank you, We’ll reach out as soon as Ford Drive launches in your area.</p>
+                            <p className={'modal-text'}>Thank you, We’ll reach out as soon as Drive launches in your area.</p>
                         </div>
                     </div>
                 </div>
