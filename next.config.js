@@ -8,7 +8,6 @@ const currentEnv = process.env.APP_ENV ? process.env.APP_ENV : "dev";
 const cacheTtl = 1000 * 60 * 60 * 24;
 
 console.log(`current app env is ${currentEnv}`);
-console.log(`current env amplitude key is ${process.env.AMPLITUDE_API_KEY }, using key= ${amplitude_api_key}`);
 
 console.log(`prefix is configured to ${prefix}`);
 
